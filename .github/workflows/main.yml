@@ -3,12 +3,12 @@ name: ci
 on:
   push:
     branches:
-      - 'main'
+      - 'azure-openai'
     tags:
       - 'v*'
     pull_request:
       branches:
-        - 'main'
+        - 'azure-openai'
 
 env:
   REGISTRY: ghcr.io
