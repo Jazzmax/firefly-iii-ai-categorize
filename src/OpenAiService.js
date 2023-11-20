@@ -1,4 +1,4 @@
-import {Configuration, OpenAIApi} from "openai";
+import {Configuration, OpenAIApi} from "azure-openai";
 import {getConfigVariable} from "./util.js";
 
 export default class OpenAiService {
@@ -7,9 +7,17 @@ export default class OpenAiService {
 
     constructor() {
         const apiKey = getConfigVariable("OPENAI_API_KEY")
-
+        const endpoint = getConfigVariable("OPENAI_ENDPOINT")
+        const deploymentName = getConfigVariable("OPENAI_DEPNAME")
+        
         const configuration = new Configuration({
-            apiKey
+            apiKey: this.apiKey,
+            azure: {
+                apiKey: apiKey,
+                endpoint: endpoint,
+                deploymentName: deploymentName
+      }
+            
         });
 
         this.#openAi = new OpenAIApi(configuration)
